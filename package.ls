@@ -40,6 +40,7 @@ engines:
 
 dependencies:
   async: \*
+  colors: \*
 
 
 devDependencies: {}
