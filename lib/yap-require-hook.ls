@@ -31,12 +31,12 @@ module.exports = exports =
     module.initialized = yes
     hook!
 
+
   get-name: (m) ->
     require! <[path]>
     {find-index} = require \prelude-ls
     {loaded-modules} = module
-    name = null
     idx = loaded-modules |> find-index (.module == m)
-    name = loaded-modules[idx].name if idx?
-    return path.basename name
-
+    return null unless idx?
+    {name} = loaded-modules[idx]
+    return name: name, basename: path.basename name
