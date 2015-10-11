@@ -16,9 +16,7 @@ hook = ->
     global <<< context if context?
     m = _load request, parent, isMain
     post request, m if post?
-    loaded-module = module: m, name: request
-    loaded-modules.push loaded-module
-    return m
+    return exports.add-reference m, request
 
 
 
@@ -41,3 +39,9 @@ module.exports = exports =
     {name} = loaded-modules[idx]
     return name: name, basename: path.basename name
 
+
+  add-reference: (m, name) ->
+    {loaded-modules} = module
+    lm = module: m, name: name
+    loaded-modules.push lm
+    return m
