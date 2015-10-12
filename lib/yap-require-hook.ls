@@ -40,3 +40,4 @@ module.exports = exports =
     return null unless idx?
     {name} = loaded-modules[idx]
     return name: name, basename: path.basename name
+
