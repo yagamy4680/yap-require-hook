@@ -4,6 +4,12 @@
 module.initialized = no
 module.loaded-modules = []
 
+#
+# Inspired by
+#
+# http://fredkschott.com/post/2014/06/require-and-the-module-system/
+#
+
 
 # Hook to `module.js` in nodejs
 #
