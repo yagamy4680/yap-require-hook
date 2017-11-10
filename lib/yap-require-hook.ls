@@ -10,6 +10,13 @@ module.loaded-modules = []
 # http://fredkschott.com/post/2014/06/require-and-the-module-system/
 #
 
+FIND_MODULE = (instance) ->
+  {loaded-modules} = module
+  ret = null
+  for let m, i in loaded-modules
+    ret := m if m.module is instance
+  return ret
+
 
 # Hook to `module.js` in nodejs
 #
@@ -38,12 +45,12 @@ module.exports = exports =
 
   get-name: (m) ->
     require! <[path]>
-    {find-index} = require \prelude-ls
-    {loaded-modules} = module
-    idx = loaded-modules |> find-index (.module == m)
-    return null unless idx?
-    {name} = loaded-modules[idx]
-    return name: name, basename: path.basename name
+    mx = FIND_MODULE m
+    return null unless mx?
+    {name} = mx
+    basename = path.basename name
+    return {name, basename}
+
 
   add-reference: (m, name) ->
     {loaded-modules} = module
